@@ -1,5 +1,5 @@
 import time
-
+import sys
 import numpy as np
 from sklearn.cluster import KMeans
 import pandas as pd
@@ -69,9 +69,8 @@ def Merge_algorithm():
 
 
 
-
-data = pd.read_csv('NYC_taxi//train.csv', header=None, encoding='GBK')
-input_file = open(r'input', 'w')
+data = pd.read_csv('data/'+str(sys.argv[1])+'.csv', header=None, encoding='GBK')
+input_file = open('data/'+str(sys.argv[1])+'.temp', 'w')
 data = np.array(data)
 for i in range(1, len(data)):
     data[i][5] = float(data[i][5])
@@ -81,7 +80,6 @@ for i in range(1, len(data)):
     data[i][4] = int(data[i][4])
 
 (dict, sample_n) = Merge_algorithm()
-input_file = open(r'input', 'w')
 
 input_file.write( str(len(Cluster)) + '\n')
 for i in range(0, len(Cluster)):

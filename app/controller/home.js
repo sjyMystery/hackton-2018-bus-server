@@ -13,18 +13,27 @@ class HomeController extends Controller {
     const stream = await ctx.getFileStream();
     const name = path.basename(stream.filename);
     const result = await ctx.service.file.saveInitializeFile(name, stream);
-
-
+    await ctx.service.execute.initializeInput(result.hash);
     ctx.body = result;
   }
-  async check() {
-    const ctx = this.ctx;
-    this.ctx.body = {
-      exist: await ctx.service.file.doesFileExist(ctx.queries.uid[0]),
-    };
-  }
   async query() {
+    const data = this.ctx.request.body;
 
+    const { hash, start, end } = data;
+
+    await this.ctx.service.execute.addEdge(hash, start, end);
+    let result = await this.ctx.service.execute.caculateResult(hash);
+
+    result = await Promise.all(result.map(async (value, key) => {
+      const title = await this.ctx.service.geo.getLocationName(value.lng, value.lat);
+      return {
+        lng: value.lng,
+        lat: value.lat,
+        title,
+      };
+    }));
+
+    this.ctx.body = result;
   }
 }
 

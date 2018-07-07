@@ -21,5 +21,8 @@ module.exports = appInfo => {
     fileExtensions: [ '.csv' ],
     fileSize: '256mb',
   };
+  config.baidu = {
+    ak: 'OIVra9bgb2QWKQl4xi8xN7PirbzLle1r',
+  };
   return config;
 };

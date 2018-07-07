@@ -39,6 +39,22 @@ class FileService extends Service {
       throw e;
     }
   }
+  async readDistInline(hash) {
+    try {
+      const target = path.join(this.config.baseDir, 'data', hash + '.dist');
+      const result = fs.readFileSync(target, 'utf-8');
+      return result.split('\n').map(value => {
+        const pos = value.split(',');
+        return {
+          lng: parseFloat(pos[0]),
+          lat: parseFloat(pos[1]),
+        };
+      }).slice(0,-1);
+    } catch (e) {
+      this.ctx.logger.error(e);
+      throw e;
+    }
+  }
 }
 
 

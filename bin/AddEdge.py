@@ -1,14 +1,12 @@
 import numpy as np
 import pandas as pa
-
+import sys
 
 def check(time, BeginTime, EndTime):
     time = time.split(':')
     time = int(time[0]) * 60 + int(time[1])
-    BeginTime = BeginTime.split(':')
-    BeginTime = int(BeginTime[0]) * 60 + int(BeginTime[1])
-    EndTime = EndTime.split(':')
-    EndTime = int(EndTime[0]) * 60 + int(EndTime[1])
+    BeginTime = int(BeginTime) * 60
+    EndTime = int(EndTime) * 60
     if time >= BeginTime and time < EndTime:
         return True
     return False
@@ -29,8 +27,7 @@ def init():
         data.append([x for x in s.split(' ')])
     return (Cluster_Num, Sample_Num)
 
-
-file = open('input', 'r')
+file = open('data/'+str(sys.argv[1])+'.temp', 'r')
 data = []
 Cluster = []
 (Cluster_Num, Sample_Num) = init()
@@ -38,10 +35,11 @@ file.close()
 print(data[0])
 print(Cluster[0])
 
-
-file = open('dataset', 'w')
+file = open('data/'+str(sys.argv[1])+'.out', 'w')
 Edge = list([[0 for i in range(Cluster_Num)] for j in range(Cluster_Num)])
-AddEdge('16:00', '24:00')
+
+AddEdge(str(sys.argv[2]), str(sys.argv[3]))
+
 file.write(str(Cluster_Num) + '\n')
 for i in range(0, Cluster_Num):
     file.write(str(Cluster[i][0]) + ' ' + str(Cluster[i][1]) + '\n')
