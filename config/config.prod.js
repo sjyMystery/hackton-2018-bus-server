@@ -23,10 +23,11 @@ module.exports = appInfo => {
   config.baidu = {
     ak: 'OIVra9bgb2QWKQl4xi8xN7PirbzLle1r',
   };
-  config.cluster ={
-      listen:{
-          port:8000,
-      }
-  }
+  config.cluster = {
+    listen: {
+      port: 8000,
+      host: 'neworld.science',
+    },
+  };
   return config;
 };

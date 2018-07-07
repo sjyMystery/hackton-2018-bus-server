@@ -5,6 +5,7 @@ const exec = require('child_process').execSync;
 class ExecuteService extends Service {
   async initializeInput(hash) {
     try {
+      // convert .csv to .temp
       const ex = await this.ctx.service.file.doesFileExist(hash + '.temp');
       if (ex) {
         return;
