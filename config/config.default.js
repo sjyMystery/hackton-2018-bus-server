@@ -10,6 +10,7 @@ module.exports = appInfo => {
   config.middleware = [];
 
   config.security = {
+      whitelist:'*',
     csrf: false,
     methodNoAllow: {
       enable: false,
