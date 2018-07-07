@@ -10,7 +10,7 @@ module.exports = appInfo => {
   config.middleware = [];
 
   config.security = {
-      whitelist:'*',
+    domainWhiteList: [ 'localhost:3000' ],
     csrf: false,
     methodNoAllow: {
       enable: false,
@@ -27,7 +27,7 @@ module.exports = appInfo => {
   config.cluster = {
     listen: {
       port: 8000,
-      host: 'neworld.science',
+      hostname: 'neworld.science',
     },
   };
   return config;
