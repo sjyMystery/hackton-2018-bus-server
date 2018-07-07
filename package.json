@@ -9,6 +9,8 @@
     "egg-cors": "^2.0.0",
     "egg-oss": "^1.1.0",
     "egg-scripts": "^2.5.0",
+    "md5": "^2.2.1",
+    "md5-file": "^4.0.0",
     "stream-wormhole": "^1.0.3"
   },
   "devDependencies": {

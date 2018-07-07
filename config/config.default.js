@@ -12,14 +12,14 @@ module.exports = appInfo => {
   config.security = {
     domainWhiteList: [ 'localhost:3000' ],
     csrf: false,
-    methodnoallow: {
+    methodNoAllow: {
       enable: false,
     },
     credentials: true,
   };
   config.multipart = {
     fileExtensions: [ '.csv' ],
+    fileSize: '256mb',
   };
-
   return config;
 };

@@ -14,9 +14,18 @@ class HomeController extends Controller {
     const name = path.basename(stream.filename);
     const result = await ctx.service.file.saveInitializeFile(name, stream);
 
+
     ctx.body = result;
   }
+  async check() {
+    const ctx = this.ctx;
+    this.ctx.body = {
+      exist: await ctx.service.file.doesFileExist(ctx.queries.uid[0]),
+    };
+  }
+  async query() {
 
+  }
 }
 
 module.exports = HomeController;
