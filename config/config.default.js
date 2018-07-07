@@ -10,7 +10,7 @@ module.exports = appInfo => {
   config.middleware = [];
 
   config.security = {
-      domainWhiteList: [ 'localhost:3000' ],
+    domainWhiteList: [ 'localhost:3000' ],
     csrf: false,
     methodNoAllow: {
       enable: false,
