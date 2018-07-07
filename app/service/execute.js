@@ -12,14 +12,14 @@ class ExecuteService extends Service {
       }
       exec(`python bin/init.py ${hash}`);
     } catch (e) {
-      console.log(e);
+      this.ctx.logger.error(e);
     }
   }
   async addEdge(hash, start, end) {
     try {
       exec(`python bin/AddEdge.py ${hash} ${start} ${end}`);
     } catch (e) {
-      console.log(e);
+      this.ctx.logger.error(e);
     }
   }
   async caculateResult(hash) {
@@ -27,7 +27,7 @@ class ExecuteService extends Service {
       exec(`./bin/a.out data/${hash}.out data/${hash}.dist`);
       return await this.ctx.service.file.readDistInline(hash);
     } catch (e) {
-      console.log(e);
+      this.ctx.logger.error(e);
     }
   }
 }

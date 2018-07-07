@@ -15,6 +15,7 @@ class FileService extends Service {
       await awaitWriteStream(stream.pipe(writeStream));
     } catch (err) {
       await sendToWormhole(stream);
+      this.ctx.logger.error(err);
       throw err;
     }
 
@@ -25,6 +26,8 @@ class FileService extends Service {
       newPath = path.join(this.config.baseDir, 'data', hash + '.csv');
       fs.renameSync(target, newPath);
     } catch (e) {
+
+      this.ctx.logger.error(e);
       throw e;
     }
     return {
@@ -36,6 +39,8 @@ class FileService extends Service {
     try {
       return fs.existsSync(target);
     } catch (e) {
+
+      this.ctx.logger.error(e);
       throw e;
     }
   }
@@ -49,7 +54,7 @@ class FileService extends Service {
           lng: parseFloat(pos[0]),
           lat: parseFloat(pos[1]),
         };
-      }).slice(0,-1);
+      }).slice(0, -1);
     } catch (e) {
       this.ctx.logger.error(e);
       throw e;
