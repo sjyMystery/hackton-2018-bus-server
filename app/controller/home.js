@@ -16,6 +16,12 @@ class HomeController extends Controller {
     await ctx.service.execute.initializeInput(result.hash);
     ctx.body = result;
   }
+  async check() {
+    const ctx = this.ctx;
+    this.ctx.body = {
+      exist: await ctx.service.file.doesFileExist(`${ctx.request.queries.hash[0]}.csv`),
+    };
+  }
   async query() {
     const data = this.ctx.request.body;
 
